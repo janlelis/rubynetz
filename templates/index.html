@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:hv="http://astroblog.spaceboyz.net/harvester/xslt-functions"
+		xmlns:date="http://exslt.org/dates-and-times"
+		xmlns:str="http://exslt.org/strings"
+		exclude-result-prefixes="xsl hv date str">
+  
+  <xsl:output method="xml"
+              version="1.0"
+              encoding="utf-8"
+              doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+              doctype-system="DTD/xhtml1-strict.dtd"
+              indent="yes"/>
+  
+  
+  <xsl:template match="/collections">
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+      <head>
+	<title>RubyNetz.de</title>
+	<link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="atom.xml" />
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="rss.rdf" />
+	<link rel="alternate" type="application/atom+xml" title="ATOM 1.0 (all)" href="atom-all.xml" />
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 (all)" href="rss-all.rdf" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" href="harvester.css"/>
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<xsl:comment><![CDATA[[if IE 7]>
+  <link rel="stylesheet" type="text/css" href="harvester_ie7.css" />
+<![endif]]]></xsl:comment>
+	<xsl:comment><![CDATA[[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="harvester_lte_ie6.css" />
+<![endif]]]></xsl:comment>
+      </head>
+      
+      <body>
+	<div class="head">
+	  <h1><a href="./">RubyNetz</a></h1>
+	</div>
+	
+	<div class="tickers1">
+          <div class="ticker">
+            <h2>Blogs</h2>
+            <ul class="tickerlinks">
+              <xsl:for-each select="collection[@name='blogs']/feed">
+		<xsl:sort select="translate(title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+		<li><a href="{link}" title="{description}"><xsl:value-of select="title"/></a></li>
+              </xsl:for-each>
+            </ul>
+          </div>
+         <div class="ticker">
+            <h2>Subscribe</h2>
+            <p>
+              <a href="http://feeds.feedburner.com/rubynetz">Blogs</a> / <a href="http://feeds.feedburner.com/rubynetz-all">Everything</a>
+            </p>
+          </div>
+         <div class="ticker">
+            <h2>RubyNetz.de</h2>
+            <p>
+              You think, you somehow belong to the German speaking ruby/coding/web scene?
+              Join the RubyNetz! Write a mail with your accounts to <a href="mailto:join@rubynetz.de">join@RubyNetz.de</a>
+            </p>
+          </div>
+
+          <xsl:call-template name="ticker-boxen">
+            <xsl:with-param name="collection" select="'ticker'"/>
+          </xsl:call-template>
+
+          <xsl:call-template name="ticker-boxen">
+            <xsl:with-param name="collection" select="'projects'"/>
+            </xsl:call-template>
+          <div class="ticker">
+            <h2>Contact</h2>
+              <p>
+                Powered by <a href="https://github.com/janlelis/harvester">harvester></a><br/>
+                Content by the internet<br/>
+                Hosted by <a href="http://rbjl.net">J-_-L</a>
+              </p>
+          </div>
+        </div>
+
+        <div class="tickers2">
+    <xsl:if test="hv:collection-items('photos')/item">
+      <div class="ticker">
+        <h2>Photos</h2>
+
+        <ul class="photos">
+          <xsl:for-each select="hv:collection-items('photos')/item">
+
+      <xsl:variable name="title" select="title"/>
+      <xsl:variable name="link" select="link"/>
+
+      <xsl:for-each select="hv:item-images(string(rss),
+                string(link))//img">
+        <li>
+          <a href="{$link}">
+            <img src="{@src}" title="{$title}" alt="{$title}"/>
+          </a>
+        </li>
+      </xsl:for-each>
+          </xsl:for-each>
+        </ul>
+      </div>
+    </xsl:if>
+	  
+          <xsl:call-template name="ticker-boxen">
+            <xsl:with-param name="collection" select="'links'"/>
+          </xsl:call-template>
+        </div>
+
+	<div class="tickers3">
+	  <xsl:variable name="microblogs"
+			select="collection[@name='microblogs']"/>
+	  <xsl:variable name="items"
+			select="hv:collection-items('microblogs', 100)"/>
+	  <xsl:variable name="now"
+			select="date:date-time()"/>
+
+	  <div class="ticker">
+	    <h2>Microblogging</h2>
+	    <ul>
+              <xsl:for-each select="$items/item">
+		<!--xsl:sort select="date" order="descending"/-->
+		<xsl:variable name="diff" 
+			      select="date:difference(date, $now)"/>
+		<xsl:if test="$diff = 'P0D' or $diff = 'P1D' or
+			      starts-with($diff, 'PT') or
+			      starts-with($diff, '-P')">
+		  <xsl:variable name="rss" select="string(rss)"/>
+		  <xsl:variable name="feed"
+				select="$microblogs/feed[rss=$rss]"/>
+		  <xsl:call-template name="microblog-entry">
+		    <xsl:with-param name="feed" select="$feed"/>
+		    <xsl:with-param name="entry" select="."/>
+		  </xsl:call-template>
+		</xsl:if>
+	      </xsl:for-each>
+	    </ul>
+	  </div>
+	</div>
+	
+	<div class="hfeed">
+	  <xsl:variable name="blogs" select="collection[@name='blogs']"/>
+
+          <xsl:for-each select="hv:collection-items('blogs')/item">
+            <xsl:variable name="rss" select="string(rss)"/>
+            <xsl:variable name="feed" select="$blogs/feed[rss=$rss]"/>
+            <div class="entry hentry">
+              <h2 class="blog-title">
+		<a href="{$feed/link}"><xsl:value-of select="$feed/title"/></a>
+              </h2>
+              <div class="entrydate published" title="{date}">
+		<xsl:value-of select="concat(date:day-in-month(date),'.',date:month-in-year(date),'. ',format-number(date:hour-in-day(date),'00'),':',format-number(date:minute-in-hour(date),'00'))"/>
+	      </div>
+              <h3 class="entry-title"><a href="{link}" rel="bookmark"><xsl:value-of select="title"/></a></h3>
+              <div class="entrydesc entry-content">
+		<xsl:value-of select="hv:item-description($rss, string(link))" disable-output-escaping="yes"/>
+              </div>
+	      
+              <xsl:variable name="enclosures" select="hv:item-enclosures(string($rss), string(link))"/>
+              <xsl:if test="count($enclosures/enclosure) &gt; 0">
+		<ul>
+                  <xsl:for-each select="$enclosures/enclosure">
+                    <xsl:variable name="filename">
+                      <xsl:call-template name="basename">
+			<xsl:with-param name="path" select="href"/>
+                      </xsl:call-template>
+                    </xsl:variable>
+                    <li>
+                      <xsl:choose>
+			<xsl:when test="string-length(string(title)) &gt; 0">
+                          <xsl:value-of select="title"/>
+                          (<a href="{href}" rel="enclosure"><xsl:value-of select="$filename"/></a>)
+			</xsl:when>
+			<xsl:otherwise>
+                          <a href="{href}" rel="enclosure"><xsl:value-of select="$filename"/></a>
+			</xsl:otherwise>
+                      </xsl:choose>
+		      
+                      <xsl:text> </xsl:text>
+		      
+                      <xsl:call-template name="format-enclosure-length">
+			<xsl:with-param name="length" select="number(length)"/>
+                      </xsl:call-template>
+                    </li>
+                  </xsl:for-each>
+		</ul>
+              </xsl:if>
+	      
+              <div class="entryfoot"><a href="{link}" title="{link}">mehr&#8230;</a></div>
+            </div>
+	  </xsl:for-each>
+	</div>
+
+	<p style="display:none"><a href="http://cthulhu.c3d2.de/~astro/badpit.html">E-Mail Address Index</a></p>
+      </body>
+    </html>
+  </xsl:template>
+  
+  <xsl:template name="ticker-boxen">
+    <xsl:param name="collection"/>
+    
+    <xsl:for-each select="collection[@name=$collection]/feed">
+      <xsl:sort select="translate(title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
+      <div class="ticker hfeed">
+	<h2><a href="{link}"><xsl:value-of select="title"/></a></h2>
+	<ul class="tickerlinks">
+          <xsl:for-each select="hv:feed-items(string(rss), 8)/item">
+            <li class="hentry">
+              <xsl:choose>
+		<xsl:when test="string-length(title) &gt; 32">
+                  <a href="{link}" title="{title}" rel="bookmark" class="entry-title"><xsl:value-of select="substring(title, 1, 30)"/>&#8230;</a>
+		</xsl:when>
+		<xsl:otherwise>
+                  <a href="{link}" rel="bookmark" class="entry-title"><xsl:value-of select="title"/></a>
+		</xsl:otherwise>
+              </xsl:choose>
+            </li>
+          </xsl:for-each>
+	</ul>
+      </div>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <xsl:template name="format-enclosure-length">
+    <xsl:param name="length"/>
+    
+    <xsl:if test="$length">
+      <xsl:choose>
+	<xsl:when test="$length &lt; 1024">
+          <xsl:value-of select="$length"/> Bytes
+	</xsl:when>
+	<xsl:when test="$length &lt; 1048576">
+          <xsl:value-of select="format-number($length div 1024, '0.0#')"/> KB
+	</xsl:when>
+	<xsl:when test="$length &lt; 1073741824">
+          <xsl:value-of select="format-number($length div 1048576, '0.0#')"/> MB
+	</xsl:when>
+	<xsl:otherwise>
+          <xsl:value-of select="format-number($length div 1073741824, '0.0#')"/> GB
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template name="basename">
+    <xsl:param name="path"/>
+    
+    <xsl:choose>
+      <xsl:when test="contains($path, '/')">
+	<xsl:call-template name="basename">
+          <xsl:with-param name="path" select="substring-after($path, '/')"/>
+	</xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:value-of select="$path"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="microblog-entry">
+    <xsl:param name="feed"/>
+    <xsl:param name="entry" select="."/>
+
+    <xsl:variable name="nick">
+      <xsl:choose>
+	<xsl:when test="contains($feed/title, ' timeline')">
+	  <xsl:value-of select="substring-before(string($feed/title), ' timeline')"/>
+	</xsl:when>
+	<xsl:when test="contains($feed/title, 'Twitter / ')">
+	  <xsl:value-of select="substring-after(string($feed/title), 'Twitter / ')"/>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="$feed/title"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="text"
+		  select="hv:item-description(string($entry/rss), string($entry/link))"/>
+    <li>
+      <xsl:if test="starts-with($entry/link,
+		    'http://identi.ca/notice/')">
+	<a href="http://identi.ca/{$nick}">
+	  <img class="avatar" src="http://identi.ca/index.php?action=avatarbynickname&amp;nickname={$nick}&amp;size=24"
+	       alt="avatar"/>
+	</a>
+      </xsl:if>
+      <xsl:if test="starts-with($entry/link,
+		    'http://twitter.com/')">
+        <a href="http://twitter.com/{$nick}">
+	  <img class="avatar" src="http://spiurl.appspot.com/{$nick}"
+	       alt="avatar"/>
+	</a>
+      </xsl:if>
+      <a class="nickname"
+	 href="{$entry/link}"><xsl:value-of select="$nick"/></a>:
+      <xsl:choose>
+	<xsl:when test="starts-with($entry/link,
+			'http://twitter.com/')">
+	  <!-- Twitter does plaintext only -->
+	  <xsl:call-template name="linkify">
+	    <xsl:with-param name="s" select="substring-after($text, ': ')"/>
+	  </xsl:call-template>
+	</xsl:when>
+	<xsl:otherwise>
+	  <!-- identi.ca can haz linkz -->
+	  <xsl:value-of select="$text"
+			disable-output-escaping="yes"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </li>
+  </xsl:template>
+
+  <xsl:template name="linkify">
+    <xsl:param name="s"/>
+
+    <xsl:choose>
+      <xsl:when test="contains($s, 'http://')">
+	<xsl:value-of select="substring-before($s, 'http://')"/>
+	<xsl:variable name="s2" select="concat('http://', substring-after($s, 'http://'))"/>
+	<xsl:choose>
+	  <xsl:when test="contains($s2, ' ')">
+	    <xsl:variable name="url" select="substring-before($s2, ' ')"/>
+	    <a href="{$url}"><xsl:value-of select="$url"/></a>
+	    <xsl:text> </xsl:text>
+	    <xsl:call-template name="linkify">
+	      <xsl:with-param name="s" select="substring-after($s2, ' ')"/>
+	    </xsl:call-template>
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <a href="{$s2}"><xsl:value-of select="$s2"/></a>
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:when>
+      <xsl:when test="contains($s, '#')">
+	<xsl:value-of select="substring-before($s, '#')"/>
+	<xsl:variable name="s2" select="concat('#', substring-after($s, '#'))"/>
+	<xsl:choose>
+	  <xsl:when test="contains($s2, ' ')">
+	    <xsl:variable name="hashtag" select="substring-before($s2, ' ')"/>
+	    <a href="http://search.twitter.com/search?q={str:encode-uri($hashtag,
+		     true())}">
+	      <xsl:value-of select="$hashtag"/>
+	    </a>
+	    <xsl:text> </xsl:text>
+	    <xsl:call-template name="linkify">
+	      <xsl:with-param name="s" select="substring-after($s2, ' ')"/>
+	    </xsl:call-template>
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <a href="http://search.twitter.com/search?q={str:encode-uri($s2, true())}">
+	      <xsl:value-of select="$s2"/>
+	    </a>
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:value-of select="$s"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+</xsl:stylesheet>

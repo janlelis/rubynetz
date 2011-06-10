@@ -1,0 +1,84 @@
+= Harvester 0.8
+The Harvester is a web-based Feed-Aggregator
+
+Running instances can be seen at:
+http://blog-harvester.de or http://rubynetz.de
+
+The Harvester eats the feeds you want and produces a static html/feed page that aggregates all those.
+
+== Warning
+
+Harvester 0.8 is alpha quality! There are still some unfixed bugs (e.g. database stuff)
+
+== Installation
+
+Install the harvester with
+
+  gem install harvester --pre
+
+You can now create a new harvester project with
+
+  harvester new <project_directory>
+
+Then you will need to configure <tt>config.yaml</tt>, <tt>collections.yaml</tt> and the templates to suit your needs (see below). You also have to run <tt>harvester db create</tt> (in that directory) to create your initial database structure.
+
+== Configuration
+
+<tt>config.yaml</tt> contains general configuration, like paths, logs and timeouts. You can also configure your database there. The default database backend is SQLite3, but all the following ones are supported:
+* SQLite3
+* PostgreSQL
+* MySQL
+
+The <tt>collections.yaml</tt> file contains the links to your desired feeds.
+
+== Usage
+
+Then run
+
+  harvester run
+
+in the project directory or run
+
+  harvester run -c path/to/config.yaml
+
+This will create the output files. That's it ;).
+
+Usually, you want to run this command automatically every x seconds/minutes. You can use a program like <tt>cron</tt> or simply run
+
+  harvester clock <time>
+
+to start a simple scheduler.
+
+There some more harvester commands to explore. Run
+
+  harvester
+
+to get a command list.
+
+== Customizing the templates
+
+...
+
+
+== Todo
+* Still some things broken after update
+* Fix database issues
+* Fix wrong tweet escaping (sometimes: ä-->&auml;)
+* Improve/fix feed parsing (especially atom)
+* Fix chart generation
+* Tidy up templates / remove astro-specific links
+* Extract mrss.rb into extra gem
+
+* Security issues
+* Optimize performance
+* Fix jabber bot
+* Implement some kind of tag filters
+
+== Credits
+
+* {Astro}[https://github.com/astro] (2005-2008)
+* Neingeist
+* Tigion
+* Josef Spillner
+* {J-_-L}[https://github.com/janlelis]
+* Others (MySQL patch)

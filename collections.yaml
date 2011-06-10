@@ -1,0 +1,50 @@
+---
+blogs:
+- http://feeds.feedburner.com/ruby_mine?format=xml
+- http://rbjl.net/atom
+- http://grosser.it/feed/
+- http://feeds.feedburner.com/rkh?format=xml
+- http://feeds.feedburner.com/Paperplanes?format=xml
+- http://dennisreimann.de/atom.xml
+- http://feeds.jkraemer.net/jkraemer
+- http://feeds.feedburner.com/jankrutisch/atom/en
+- http://www.hagenburger.net/hagenburger.rss
+- http://feeds.feedburner.com/colszowka?format=xml
+- http://euruko2011.org/feed.atom
+- http://murfy.de/rss
+- http://feeds.alexbcoles.com/alexbcoles?format=xml
+- http://blog.innerewut.de/feed/atom.xml
+- http://feeds.feedburner.com/svenfuchs?format=xml
+- http://upstre.am/blog/feed/
+ticker:
+- http://www.ruby-lang.org/de/feeds/news.rss
+- http://www.reddit.com/r/ruby/.rss
+- http://www.reddit.com/r/rails/.rss
+- http://feeds.feedburner.com/gemcutter-latest
+- http://stackoverflow.com/feeds/tag/ruby
+- http://redmine.ruby-lang.org/projects/ruby-19/activity.atom
+#- http://www.ruby-forum.com/feed/global
+#- http://forum.ruby-portal.de/feed.php
+projects:
+- https://github.com/feeds/janlelis/commits/harvester
+links:
+photos:
+microblogs:
+- http://twitter.com/statuses/user_timeline/8936812.atom   # rug-b
+- http://twitter.com/statuses/user_timeline/263762253.atom # eurucamp
+- http://twitter.com/statuses/user_timeline/154465831.atom # euruko2011
+- http://twitter.com/statuses/user_timeline/74808879.atom  # rbjl
+- http://twitter.com/statuses/user_timeline/18628850.atom  # grosser
+- http://twitter.com/statuses/user_timeline/14147875.atom  # hagenburger
+- http://twitter.com/statuses/user_timeline/1145881.atom   # dbloete
+- http://twitter.com/statuses/user_timeline/16997374.atom  # konstantinhaase
+- http://twitter.com/statuses/user_timeline/14658472.atom  # roidrage
+- http://twitter.com/statuses/user_timeline/18250780.atom  # jkraemer
+- http://twitter.com/statuses/user_timeline/6151392.atom   # TheDeadSerious
+- http://twitter.com/statuses/user_timeline/1272591.atom   # halfbyte
+- http://twitter.com/statuses/user_timeline/109733953.atom # murphy_karasu
+- http://twitter.com/statuses/user_timeline/18542490.atom  # bovensiepen
+- http://twitter.com/statuses/user_timeline/13020132.atom  # myabc
+- http://twitter.com/statuses/user_timeline/14171126.atom  # jweiss
+- http://twitter.com/statuses/user_timeline/9459332.atom   # svenfuchs
+- http://twitter.com/statuses/user_timeline/14282544.atom  # freaklikeme

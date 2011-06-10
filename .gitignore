@@ -1,0 +1,7 @@
+config.yaml
+*.log
+html
+
+~*
+*.swp
+*.swo
