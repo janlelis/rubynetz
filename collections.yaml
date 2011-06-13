@@ -27,6 +27,7 @@ ticker:
 #- http://www.ruby-forum.com/feed/global
 #- http://forum.ruby-portal.de/feed.php
 projects:
+- https://github.com/feeds/janlelis/commits/rubynetz.de
 - https://github.com/feeds/janlelis/commits/harvester
 links:
 photos:
