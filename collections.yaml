@@ -17,6 +17,7 @@ blogs:
 - http://feeds.feedburner.com/svenfuchs?format=xml
 - http://upstre.am/blog/feed/
 - http://codecraft.io/atom.xml
+- http://feeds.feedburner.com/rubypulse_episodes?format=xml
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
 - http://www.reddit.com/r/ruby/.rss
@@ -52,3 +53,4 @@ microblogs:
 - http://twitter.com/statuses/user_timeline/14282544.atom  # freaklikeme
 - http://twitter.com/statuses/user_timeline/1221141.atom   # asaaki
 - http://twitter.com/statuses/user_timeline/314449910.rss  # burningTyger
+- http://twitter.com/statuses/user_timeline/38035155.atom  # apeuchert
