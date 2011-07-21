@@ -18,6 +18,7 @@ blogs:
 - http://upstre.am/blog/feed/
 - http://codecraft.io/atom.xml
 - http://feeds.feedburner.com/rubypulse_episodes?format=xml
+- http://www.rorsecurity.info/journal/rss.xml
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
 - http://www.reddit.com/r/ruby/.rss
