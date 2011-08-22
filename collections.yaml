@@ -13,7 +13,7 @@ blogs:
 - http://euruko2011.org/feed.atom
 - http://murfy.de/rss
 - http://feeds.alexbcoles.com/alexbcoles?format=xml
-- http://blog.innerewut.de/feed/atom.xml
+# - http://blog.innerewut.de/feed/atom.xml
 - http://feeds.feedburner.com/svenfuchs?format=xml
 - http://upstre.am/blog/feed/
 - http://codecraft.io/atom.xml
