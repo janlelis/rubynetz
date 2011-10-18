@@ -21,6 +21,8 @@ blogs:
 - http://www.rorsecurity.info/journal/rss.xml
 - http://railscamp.de/api/rss/blog/recent_posts
 - http://feeds.feedburner.com/Nicksda
+- http://pragtob.wordpress.com/feed/
+- http://pegasus-alpha.eu/quintus_posts/ruby_feed
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
 - http://www.reddit.com/r/ruby/.rss
@@ -59,3 +61,4 @@ microblogs:
 - http://twitter.com/statuses/user_timeline/38035155.atom  # apeuchert
 - http://twitter.com/statuses/user_timeline/12515352.atom  # skddc
 - http://twitter.com/statuses/user_timeline/286312129.atom # apotonick
+- http://twitter.com/statuses/user_timeline/334768270.atom # pragtob
