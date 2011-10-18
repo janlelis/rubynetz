@@ -23,6 +23,7 @@ blogs:
 - http://feeds.feedburner.com/Nicksda
 - http://pragtob.wordpress.com/feed/
 - http://pegasus-alpha.eu/quintus_posts/ruby_feed
+- http://praktikanten.brueckenschlaeger.org/articles.atom
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
 - http://www.reddit.com/r/ruby/.rss
@@ -62,3 +63,4 @@ microblogs:
 - http://twitter.com/statuses/user_timeline/12515352.atom  # skddc
 - http://twitter.com/statuses/user_timeline/286312129.atom # apotonick
 - http://twitter.com/statuses/user_timeline/334768270.atom # pragtob
+- http://twitter.com/statuses/user_timeline/324339971.atom # d_evolute
