@@ -23,7 +23,7 @@ blogs:
 - http://feeds.feedburner.com/Nicksda
 - http://pragtob.wordpress.com/feed/
 - http://pegasus-alpha.eu/quintus_posts/ruby_feed
-- http://praktikanten.brueckenschlaeger.org/articles.atom
+- http://praktikanten.brueckenschlaeger.org/category/web.atom
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
 - http://www.reddit.com/r/ruby/.rss
