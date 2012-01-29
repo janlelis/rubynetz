@@ -22,7 +22,7 @@ blogs:
 - http://railscamp.de/api/rss/blog/recent_posts
 - http://feeds.feedburner.com/Nicksda
 - http://pragtob.wordpress.com/feed/
-- http://pegasus-alpha.eu/quintus_posts/ruby_feed
+- http://pegasus-alpha.eu/blog/categories/1/feed
 - http://praktikanten.brueckenschlaeger.org/articles.atom
 ticker:
 - http://www.ruby-lang.org/de/feeds/news.rss
