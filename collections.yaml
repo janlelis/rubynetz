@@ -15,7 +15,7 @@ blogs:
 - http://feeds.alexbcoles.com/alexbcoles?format=xml
 # - http://blog.innerewut.de/feed/atom.xml
 - http://feeds.feedburner.com/svenfuchs?format=xml
-- http://upstre.am/blog/feed/
+- http://upstre.am/feed/atom/
 - http://codecraft.io/atom.xml
 - http://feeds.feedburner.com/rubypulse_episodes?format=xml
 - http://www.rorsecurity.info/journal/rss.xml
